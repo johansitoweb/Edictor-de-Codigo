@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import filedialog, scrolledtext, messagebox, Menu, ttk # Import ttk for Treeview
+from tkinter import filedialog, scrolledtext, messagebox, Menu, ttk 
 import os
 import re
 from PIL import Image, ImageTk # Import Pillow for image handling
@@ -25,29 +25,29 @@ class CodeEditor:
         self.icon_bar_frame.pack(side=tk.LEFT, fill=tk.Y)
         self.create_icon_bar()
 
-        # --- Content Area Frame (holds sidebar, editor, and bottom panel) ---
+        
         self.content_area_frame = tk.Frame(self.main_frame, bg='#21252b')
         self.content_area_frame.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
 
-        # --- Sidebar Frame (for File Explorer) ---
+        
         self.sidebar_frame = tk.Frame(self.content_area_frame, width=250, bg='#282c34')
         self.sidebar_frame.pack(side=tk.LEFT, fill=tk.Y, padx=(0, 1)) # Small gap
         self.sidebar_visible = True
         self.create_file_explorer()
 
-        # --- Editor and Bottom Panel Wrapper ---
+        
         self.editor_bottom_wrapper = tk.Frame(self.content_area_frame, bg='#21252b')
         self.editor_bottom_wrapper.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
 
-        # --- Line Numbers Frame ---
+        
         self.line_numbers_frame = tk.Frame(self.editor_bottom_wrapper, width=30, bg='#282c34')
         self.line_numbers_frame.pack(side=tk.LEFT, fill=tk.Y)
 
-        # --- Editor Frame ---
+        
         self.editor_area_frame = tk.Frame(self.editor_bottom_wrapper)
         self.editor_area_frame.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
 
-        # --- Área de texto (editor) ---
+        
         self.text_area = scrolledtext.ScrolledText(
             self.editor_area_frame,
             wrap='none',
@@ -62,10 +62,10 @@ class CodeEditor:
         )
         self.text_area.pack(fill=tk.BOTH, expand=True)
 
-        # --- Barras de desplazamiento (conectadas al área de texto) ---
+       
         self.text_area.vbar.config(command=self.on_vertical_scroll)
 
-        # --- Números de línea ---
+        
         self.line_numbers_canvas = tk.Canvas(
             self.line_numbers_frame,
             width=30,
@@ -74,7 +74,7 @@ class CodeEditor:
         )
         self.line_numbers_canvas.pack(side=tk.LEFT, fill=tk.Y)
 
-        # --- Resaltado de Sintaxis (ejemplo para Python) ---
+    
         self.text_area.tag_configure("keyword", foreground="#c678dd")
         self.text_area.tag_configure("string", foreground="#98c379")
         self.text_area.tag_configure("comment", foreground="#5c6370")
@@ -86,27 +86,27 @@ class CodeEditor:
                          "for", "while", "break", "continue", "try", "except", "finally",
                          "with", "as", "True", "False", "None", "and", "or", "not", "in", "is"]
 
-        # --- Eventos para actualizar números de línea y resaltar sintaxis ---
+     
         self.text_area.bind("<KeyRelease>", self.on_key_release)
         self.text_area.bind("<MouseWheel>", self.on_vertical_scroll)
         self.text_area.bind("<Configure>", self.update_line_numbers)
 
-        # --- Bottom Panel (Terminal, Problems, Output) ---
+        
         self.bottom_panel_frame = tk.Frame(self.editor_bottom_wrapper, height=200, bg='#1e1e1e')
         self.bottom_panel_frame.pack(side=tk.BOTTOM, fill=tk.X)
         self.bottom_panel_visible = True
         self.create_bottom_panel()
 
-        # --- Menú Superior ---
+      
         self.create_menu()
 
-        # --- Barra de estado (bottom bar like VS Code) ---
+       
         self.status_bar = tk.Frame(master, bd=1, relief=tk.SUNKEN, bg='#007acc') # VS Code blue
         self.status_bar.pack(side=tk.BOTTOM, fill=tk.X)
         self.create_status_bar()
 
-        self.master.after(100, self.update_line_numbers) # Initial call after UI is fully packed and rendered
-        self.master.after(100, self.update_status_bar) # Initial status bar update
+        self.master.after(100, self.update_line_numbers) 
+        self.master.after(100, self.update_status_bar) 
 
     def load_icon(self, icon_name, size=(24, 24)):
         """Loads an icon image and returns a PhotoImage object."""
